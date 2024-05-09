@@ -1,1 +1,5 @@
+/**/**/node_modules/
+/**/.expo
 venv
+.vscode
+/**/**/.DS_Store
