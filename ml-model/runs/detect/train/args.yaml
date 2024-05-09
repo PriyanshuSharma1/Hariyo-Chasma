@@ -1,7 +1,7 @@
 task: detect
 mode: train
 model: yolov8s.pt
-data: /Users/priyanshusharma/Hariyo-Chasma/ml-model/Hariyo-Chasma-Labelled-Dataset-1/data.yaml
+data: /Users/priyanshusharma/Hariyo-Chasma/ml-model/Hariyo-Chasma-Labelled-Dataset-2/data.yaml
 epochs: 10
 time: null
 patience: 100
