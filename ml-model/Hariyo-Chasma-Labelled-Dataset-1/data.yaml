@@ -1,0 +1,15 @@
+names:
+  - carryload
+  - garbage
+  - load
+  - person
+nc: 4
+roboflow:
+  license: CC BY 4.0
+  project: hariyo-chasma-labelled-dataset
+  url: https://universe.roboflow.com/hariyo-chasma/hariyo-chasma-labelled-dataset/dataset/1
+  version: 1
+  workspace: hariyo-chasma
+test: ../test/images
+train: ./train/images
+val: ./valid/images
