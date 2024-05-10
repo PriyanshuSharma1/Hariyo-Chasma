@@ -2,17 +2,15 @@ import {
 	View,
 	ScrollView,
 	Text,
-	Pressable,
 	Platform,
 	Image,
+	Pressable,
 } from 'react-native';
 import Ionicon from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import LottieView from 'lottie-react-native';
-
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const quickAccess = [
 	{

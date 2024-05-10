@@ -29,7 +29,7 @@ export default function HomeLayout() {
 	}, []);
 
 	return (
-		<Tabs>
+		<Tabs screenOptions={{ tabBarActiveTintColor: '#25B089' }}>
 			<Tabs.Screen
 				name='index'
 				options={{
@@ -70,7 +70,7 @@ export default function HomeLayout() {
 			<Tabs.Screen
 				name='user/index'
 				options={{
-					title: 'User',
+					title: 'User Profile',
 					tabBarIcon: ({ color }) => (
 						<Ionicons name='person-outline' size={16} color={color} />
 					),

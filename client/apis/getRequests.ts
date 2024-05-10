@@ -12,7 +12,6 @@ export const createRequest = async (data: {}) => {
 	axios
 		.post('/pickups', data)
 		.then((res) => {
-			console.log(res.data);
 			return res.data;
 		})
 		.catch((err) => console.log(err));

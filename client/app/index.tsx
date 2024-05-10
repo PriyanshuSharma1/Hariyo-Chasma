@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginPage() {
 	const { user, setUser } = useContext(UserContext);
-	const [phone, setPhone] = useState('9812345678');
+	const [phone, setPhone] = useState('9811111111');
 	const [password, setPassword] = useState('manish123');
 
 	const handleSubmit = () => {

@@ -11,15 +11,12 @@ export default function RequestPage() {
 	const { user } = useContext(UserContext);
 
 	useEffect(() => {
-		getRequestByUser(user.user._id || '663ba2f36f129310b71c1dcb').then(
-			(res: any) => {
-				console.log(res);
-				if (res) {
-					setRequested(true);
-				}
-				setLoading(false);
+		getRequestByUser(user.user._id).then((res: any) => {
+			if (res) {
+				setRequested(true);
 			}
-		);
+			setLoading(false);
+		});
 	}, []);
 
 	const handleRequest = () => {

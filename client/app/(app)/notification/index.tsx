@@ -1,17 +1,23 @@
 import { Text, View, ScrollView, Image, Pressable } from 'react-native';
 import { useContext, useEffect, useState } from 'react';
-import { getNotifications } from '../../../apis/notification';
+import { getNotificationByAddress } from '../../../apis/notification';
+import { UserContext } from '../../../context/UserContext';
 
 import ip from '../../../utils/ip';
+import { getMyDetails } from '../../../apis/loadUser';
 
 export default function NotificationPage() {
-	const { user } = useContext(UserContext);
+	const [user, setUser] = useState({});
+
 	const [notifications, setNotifications] = useState<any>([]);
 
 	useEffect(() => {
-		getNotificationsByAddress().then((res) => {
-			console.log(res.notifications);
-			setNotifications(res.notifications);
+		getMyDetails().then((res) => {
+			console.log(res.data.user);
+			setUser(res.data.user);
+			getNotificationByAddress(res.data.user.address).then((res) => {
+				setNotifications(res.notifications);
+			});
 		});
 	}, []);
 

@@ -5,3 +5,4 @@ venv
 /**/**/.DS_Store
 /**/android
 /**/ios
+/ml_model/**.jpg
