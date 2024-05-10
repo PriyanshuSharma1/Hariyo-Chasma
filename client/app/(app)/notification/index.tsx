@@ -1,24 +1,53 @@
-import { Text, View, Image } from 'react-native';
+import { Text, View, ScrollView, Image, Pressable } from 'react-native';
+import { useEffect, useState } from 'react';
+import { getNotifications } from '../../../apis/notification';
+
+import ip from '../../../utils/ip';
 
 export default function NotificationPage() {
+	const [notifications, setNotifications] = useState<any>([]);
+
+	useEffect(() => {
+		getNotifications().then((res) => {
+			console.log(res.notifications);
+			setNotifications(res.notifications);
+		});
+	}, []);
+
 	return (
-		<View className='flex items-center justify-center w-full'>
-			{/* md */}
-			<View className='w-full p-3 md:w-4/5'>
-				<View className='p-4 bg-white rounded-lg '>
-					<View className='w-full h-64 overflow-hidden rounded-lg'>
-						<Image
-							source={{ uri: 'https://i.pravatar.cc/400?u=123456' }}
-							width={400}
-							height={400}
-							className='object-cover w-full h-full'
-						/>
-					</View>
-					<View>
-						<Text className='text-xl font-semibold'>28 Kilo @ Time</Text>
-					</View>
-				</View>
+		<ScrollView
+			contentContainerStyle={{
+				justifyContent: 'center',
+				alignItems: 'center',
+			}}
+		>
+			<View className='w-full p-4 pt-6 md:w-4/5 lg:w-3/5'>
+				{notifications.length > 0 &&
+					notifications.map((notification: any) => (
+						<Pressable
+							onPress={() => {}}
+							key={notification._id}
+							className='p-4 mb-8 bg-white rounded-lg md:p-6'
+						>
+							<View className='w-full overflow-hidden rounded-lg h-80'>
+								<Image
+									source={{ uri: ip + '/' + notification.image }}
+									width={400}
+									height={400}
+									className='object-cover w-full h-full'
+								/>
+							</View>
+							<View className='my-4'>
+								<Text className='text-xl font-semibold'>
+									{notification.message}
+								</Text>
+								<Text className='text-sm text-gray-500'>
+									{new Date(notification.createdAt).toLocaleString()}
+								</Text>
+							</View>
+						</Pressable>
+					))}
 			</View>
-		</View>
+		</ScrollView>
 	);
 }

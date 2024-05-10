@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Platform, Image } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { createRequest, getRequestByUser } from '../../../apis/getRequests';
@@ -6,17 +6,15 @@ import { UserContext } from '../../../context/UserContext';
 
 export default function RequestPage() {
 	const animation = useRef(null);
-	const [loading, setLoading] = useState(true);
 	const [requested, setRequested] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const { user } = useContext(UserContext);
 
 	useEffect(() => {
-		if (!user) return;
-		// TODO: Remove this hard coded user id
 		getRequestByUser(user.user._id || '663ba2f36f129310b71c1dcb').then(
 			(res: any) => {
-				console.log(res.data);
-				if (res.data) {
+				console.log(res);
+				if (res) {
 					setRequested(true);
 				}
 				setLoading(false);
@@ -25,12 +23,11 @@ export default function RequestPage() {
 	}, []);
 
 	const handleRequest = () => {
-		// FIXME: Add async storage
-
-		// createRequest({ user: user._id }).then((res: any) => {
-		// 	return res.data;
-		// });
-		setRequested(true);
+		createRequest(user.user._id || '663ba2f36f129310b71c1dcb').then((res) => {
+			console.log('Request sent');
+			console.log(res);
+			setRequested(true);
+		});
 	};
 
 	return (
@@ -38,7 +35,7 @@ export default function RequestPage() {
 			<View className='flex items-center justify-center'>
 				{/* lottie icons */}
 				<View className='flex items-center justify-center w-64 h-64'>
-					{
+					{Platform.OS === 'web' ? (
 						<LottieView
 							ref={animation}
 							autoPlay
@@ -53,10 +50,22 @@ export default function RequestPage() {
 								height: 200,
 							}}
 						/>
-					}
+					) : (
+						<Image
+							source={
+								requested
+									? require('../../../assets/done.gif')
+									: require('../../../assets/animationTruck.gif')
+							}
+							style={{
+								width: 200,
+								height: 200,
+							}}
+						/>
+					)}
 				</View>
 				{/* button */}
-				<View className='mt-2'>
+				<View className='mt-2 '>
 					{!requested ? (
 						<Pressable
 							onPress={handleRequest}

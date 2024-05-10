@@ -1,4 +1,11 @@
-import { View, ScrollView, Text, Pressable } from 'react-native';
+import {
+	View,
+	ScrollView,
+	Text,
+	Pressable,
+	Platform,
+	Image,
+} from 'react-native';
 import Ionicon from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import LottieView from 'lottie-react-native';
@@ -40,18 +47,27 @@ export default function HomePage() {
 				flex: 1,
 				justifyContent: 'center',
 				alignItems: 'center',
+				marginBottom: 20,
 			}}
 		>
-			<View className='w-64 h-64'>
-				<LottieView
-					autoPlay
-					loop
-					source={require('../../assets/lottie/cctv.json')}
-					style={{
-						width: 200,
-						height: 200,
-					}}
-				/>
+			<View className='flex items-center justify-center w-64 h-64 mb-4'>
+				{Platform.OS === 'web' ? (
+					<LottieView
+						autoPlay
+						loop
+						source={require('../../assets/lottie/cctv.json')}
+						style={{
+							width: 200,
+							height: 200,
+						}}
+					/>
+				) : (
+					<Image
+						source={require('../../assets/cctv.gif')}
+						width={400}
+						height={400}
+					/>
+				)}
 			</View>
 			{/* container */}
 			<View className='w-full p-4 md:p-0 md:mt-4 md:w-4/5'>
@@ -81,7 +97,7 @@ export default function HomePage() {
 					</View>
 
 					{/* announcement */}
-					<View>
+					<View className='mb-4'>
 						<Text className='mt-8 mb-4 text-xl font-semibold'>
 							Announcement
 						</Text>
