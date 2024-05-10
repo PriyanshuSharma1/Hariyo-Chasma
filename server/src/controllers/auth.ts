@@ -113,6 +113,7 @@ export const isLoggedIn = expressjwt({
 	secret: process.env.JWT_SECRET as string,
 	algorithms: ['HS256'],
 	getToken: function (req: Request) {
+		console.log(req.headers);
 		if (
 			req.headers.authorization &&
 			req.headers.authorization.startsWith('Bearer')

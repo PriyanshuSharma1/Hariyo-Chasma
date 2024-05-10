@@ -35,6 +35,7 @@ export const getAllPickUpRequest = catchAsync(
 
 export const getPickUpRequestByUser = catchAsync(
 	async (req: Request, res: Response, next: NextFunction) => {
+		console.log(req.headers);
 		const request = await PickUpRequest.find({
 			user: req.params.user,
 		}).populate('user');
