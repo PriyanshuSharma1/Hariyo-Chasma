@@ -16,7 +16,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.hariyochasma.app"
     },
     "android": {
       "package": "com.hariyochasma.app",

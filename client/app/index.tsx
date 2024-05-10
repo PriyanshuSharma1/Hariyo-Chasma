@@ -14,6 +14,7 @@ export default function LoginPage() {
 	const handleSubmit = () => {
 		signin(parseInt(phone), password).then((res) => {
 			setUser(res.data);
+			console.log('data', res.data);
 			AsyncStorage.setItem('token', JSON.stringify(res.data.token)).then(() => {
 				console.log('Signed in successullly');
 				router.push('/(app)/');
@@ -22,12 +23,12 @@ export default function LoginPage() {
 	};
 
 	return (
-		<View className='flex items-center justify-center w-full h-full bg-gray-900'>
-			<View className='w-full p-4 md:w-4/5'>
+		<View className='flex items-center justify-center w-full h-full bg-gray-300'>
+			<View className='w-full md:w-3/5 lg:w-2/5'>
 				{/* create a login form */}
-				<View className='p-6 bg-white rounded-lg md:w-4/5'>
+				<View className='flex items-center justify-center p-6 bg-white rounded-lg'>
 					{/* phone */}
-					<View className='mb-4'>
+					<View className='w-full mb-4'>
 						<Text className='text-sm font-semibold'>Phone</Text>
 						<TextInput
 							editable={true}
@@ -37,7 +38,7 @@ export default function LoginPage() {
 						/>
 					</View>
 					{/* phone */}
-					<View className='mb-4'>
+					<View className='w-full mb-4'>
 						<Text className='text-sm font-semibold'>Password</Text>
 						<TextInput
 							secureTextEntry={true}
@@ -47,15 +48,7 @@ export default function LoginPage() {
 							onChangeText={(text) => setPassword(text)}
 						/>
 					</View>
-					<View>
-						<Text>
-							{user ? (
-								<Text> {JSON.stringify(user)}</Text>
-							) : (
-								<Text>No user found</Text>
-							)}
-						</Text>
-					</View>
+
 					<View className='flex flex-row justify-end gap-4'>
 						<Pressable
 							onPress={handleSubmit}
